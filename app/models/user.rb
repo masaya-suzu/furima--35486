@@ -15,7 +15,7 @@ class User < ApplicationRecord
 
   with_options presence: true do
     validates :nickname
-    with_options format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい'} do
+    with_options format: { with: /\A[ァ-ヶー－]+\z/, message: 'はカタカナで入力して下さい'} do
       validates :last_name_kana
       validates :first_name_kana
     end
