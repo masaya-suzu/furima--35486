@@ -13,12 +13,14 @@ class User < ApplicationRecord
     validates :first_name
   end
 
-  validates :nickname
-  with_options presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: 'はカタカナで入力して下さい'} do
+  validates :nickname, presence: true 
+  with_options format: { with: /\A[ァ-ヶー－]+\z/, message: 'はカタカナで入力して下さい'} do
     validates :last_name_kana
     validates :first_name_kana
   end
   with_options numericality: { with: /^[0-9]{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])$/ } do
     validates :birthday
   end
+
+
 end
