@@ -35,7 +35,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @item.update(item_params)
     if 
-      redirect_to root_path
+      redirect_to item_path(@item)
     else
       render template: "items/edit"
     end 
