@@ -29,7 +29,7 @@ class ItemsController < ApplicationController
 
   def update
     @item.update(item_params)
-    if 
+    if @item.save
       redirect_to item_path(@item)
     else
       render template: "items/edit"
