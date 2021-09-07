@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :postage
   belongs_to :prefecture
   belongs_to :delivery_date
+  has_one :buyer
 
 
   with_options presence: true do
