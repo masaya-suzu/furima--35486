@@ -1,9 +1,7 @@
 class BuyersController < ApplicationController
   before_action :authenticate_user!, except: :index
   def index
-  end
-
-  def new
+    @item = Item.find(params[:item_id])
     @buyer = Buyer.new
   end
 
