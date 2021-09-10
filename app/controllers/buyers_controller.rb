@@ -8,6 +8,7 @@ class BuyersController < ApplicationController
   end
 
   def create
+    #binding.pry
     @item = Item.find(params[:item_id])
     @buyer_address = BuyerAddress.new(buyer_params)
     if @buyer_address.valid?
@@ -21,7 +22,7 @@ class BuyersController < ApplicationController
   private
 
   def buyer_params
-    params.require(:buyer_address).permit(:postcode, :prefecture_id, :city, :block, :building, :phone_number).merge(user_id: current_user.id)
+    params.require(:buyer_address).permit(:postcode, :prefecture_id, :city, :block, :building, :phone_number).merge(user_id: current_user.id, item_id: @item.id)
   end
 
  # def sold_out_item
