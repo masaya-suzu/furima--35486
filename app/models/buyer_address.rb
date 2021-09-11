@@ -8,9 +8,10 @@ class BuyerAddress
   validates :block, presence: true
   validates :phone_number, presence: true, format: { with: /\A\d{10}$|^\d{11}\z/ }
   validates :token, presence: true
+  validates :user_id, presence: true
+  validates :item_id, presence: true
 
   def save
-   # binding.pry
     buyer = Buyer.create(user_id: user_id, item_id: item_id)
     Address.create(postcode: postcode, prefecture_id: prefecture_id, city: city, block: block, building: building, phone_number: phone_number, buyer_id: buyer.id)
   end
