@@ -1,6 +1,5 @@
 class BuyersController < ApplicationController
   before_action :authenticate_user!, only: [:index]
-  #before_action :sold_out_item, only: [:index]
 
   def index
     @item = Item.find(params[:item_id])
