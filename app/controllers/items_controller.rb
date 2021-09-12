@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.buyer || current_user.id == item.find(params[:id]).user_id
+    if @item.buyer
       redirect_to root_path
     end
   end
