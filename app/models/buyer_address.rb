@@ -6,7 +6,7 @@ class BuyerAddress
   validates :prefecture_id, numericality: {other_than: 0, message: "Select"}
   validates :city, presence: true
   validates :block, presence: true
-  validates :phone_number, presence: true, format: { with: /\A\d{10}$|^\d{11}\z/ }
+  validates :phone_number, presence: true, format: { with: /\A\d{10}$|^\d{11}$|[0-9]+\z/ }
   validates :token, presence: true
   validates :user_id, presence: true
   validates :item_id, presence: true

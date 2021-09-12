@@ -2,11 +2,18 @@ require 'rails_helper'
 
 RSpec.describe BuyerAddress, type: :model do
   before do
-    @buyer_address = FactoryBot.build(:buyer_address)
+    item = FactoryBot.create(:item)
+    user = FactoryBot.create(:user)
+    @buyer_address = FactoryBot.build(:buyer_address, item_id: item.id, user_id: user.id)
+    sleep 1
   end
   describe '購入者情報入力' do
     context '購入者情報入力がうまくいく時' do
       it '全ての値が正しく入力されていれば購入できること' do
+        expect(@buyer_address).to be_valid
+      end
+      it 'buildingの入力なくても購入できる' do
+        @buyer_address.building = ''
         expect(@buyer_address).to be_valid
       end
     end
@@ -16,7 +23,7 @@ RSpec.describe BuyerAddress, type: :model do
         @buyer_address.valid?
         expect(@buyer_address.errors.full_messages).to include("Token can't be blank")
       end
-      it 'postcodeが未選択だと購入できない' do
+      it 'postcodeが未入力だと購入できない' do
         @buyer_address.postcode = ''
         @buyer_address.valid?
         expect(@buyer_address.errors.full_messages).to include("Postcode is invalid. Include hyphen(-)")
@@ -26,17 +33,15 @@ RSpec.describe BuyerAddress, type: :model do
         @buyer_address.valid?
         expect(@buyer_address.errors.full_messages).to include("Prefecture Select")
       end
-      it 'cityが未選択だと購入できない' do
+      it 'cityが未入力だと購入できない' do
         @buyer_address.city = ''
         @buyer_address.valid?
+        expect(@buyer_address.errors.full_messages).to include("City can't be blank")
       end
-      it 'blockが未選択だと購入できない' do
+      it 'blockが未入力だと購入できない' do
         @buyer_address.block = ''
         @buyer_address.valid?
-      end
-      it 'buildingの入力なくても登録できる' do
-        @buyer_address.building = ''
-        @buyer_address.valid?
+        expect(@buyer_address.errors.full_messages).to include("Block can't be blank")
       end
       it 'phone_numberが空だと購入できない' do
         @buyer_address.phone_number = nil
@@ -61,16 +66,15 @@ RSpec.describe BuyerAddress, type: :model do
       it 'phone_numberは11桁以内の数値のみ保存可能なこと' do
         @buyer_address.phone_number = '080123451234'
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("Phone number is invalid")
       end
       it 'phone_numberは9桁以下では購入できない' do
         @buyer_address.phone_number = '090123123'
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("Phone number is invalid")
       end
       it 'phone_numberが半角数字以外が含まれる場合では購入できない' do
         @buyer_address.phone_number = '０９０１２３４５６７'
         @buyer_address.valid?
+        expect(@buyer_address.errors.full_messages).to include("Phone number is invalid")
       end
     end
   end
