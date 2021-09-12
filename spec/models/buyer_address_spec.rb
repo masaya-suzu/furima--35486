@@ -66,15 +66,17 @@ RSpec.describe BuyerAddress, type: :model do
       it 'phone_numberは11桁以内の数値のみ保存可能なこと' do
         @buyer_address.phone_number = '080123451234'
         @buyer_address.valid?
+        expect(@buyer_address.errors.full_messages).to include("Phone number is invalid.")
       end
       it 'phone_numberは9桁以下では購入できない' do
         @buyer_address.phone_number = '090123123'
         @buyer_address.valid?
+        expect(@buyer_address.errors.full_messages).to include("Phone number is invalid.")
       end
       it 'phone_numberが半角数字以外が含まれる場合では購入できない' do
         @buyer_address.phone_number = '０９０１２３４５６７'
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@buyer_address.errors.full_messages).to include("Phone number is invalid.")
       end
     end
   end
