@@ -11,7 +11,7 @@ class BuyerAddress
     validates :user_id
     validates :item_id
   end
-  validates :prefecture_id, numericality: {other_than: 0, message: "Select"}
+  validates :prefecture_id, numericality: {other_than: 1, message: "Select"}
 
   def save
     buyer = Buyer.create(user_id: user_id, item_id: item_id)
