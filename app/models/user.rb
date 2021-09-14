@@ -19,9 +19,9 @@ class User < ApplicationRecord
     validates :last_name_kana
     validates :first_name_kana
   end
-  with_options numericality: { with: /^[0-9]{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])$/ } do
-    validates :birthday
-  end
+  # # with_options numericality: { with: /^[0-9]{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])$/ } do
+  #   validates :birthday
+  # # end
 
 
 end

@@ -126,9 +126,9 @@
     <div class="subtitle" >
       新規投稿商品
     </div>
-   <% if @item.present? %>
+   <% if @items.present? %>
     <ul class='item-lists'>
-      <% @item.each do |item| %>
+      <% @items.each do |item| %>
         <li class='list'>
           <%= link_to item_path(item.id), method: :get do %>
           <div class='item-img-content'>
