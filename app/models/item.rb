@@ -22,4 +22,5 @@ class Item < ApplicationRecord
   validates :delivery_date_id, numericality: { other_than: 0, message: "Select" }
   validates :category_id, numericality: { other_than: 0, message: "Select" }
   validates :item_info, presence: true 
+  validates :image, presence: true
 end
